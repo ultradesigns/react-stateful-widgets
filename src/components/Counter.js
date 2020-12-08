@@ -17,6 +17,7 @@ The other things can simply be _derived_ from the count itself.
 
 STEP 0:
   Start by studying the component below, and importing the state hook.
+  
 
 STEP 1:
   Using the state hook, create a 'count', 'setCount' pair.
@@ -46,32 +47,71 @@ STEP 6:
   This click handler needs to use 'setCount' to set the 'count' to be zero again.
 */
 
-import React from 'react'; /* STEP 0 */
+// STEP 0:
+//   Start by studying the component below, and importing the state hook.
+import React, { useState } from 'react'; /* STEP 0 */
 
-export default function Counter() {
+export const Counter2 = () => {
+  return (
+    <div>Counter2</div>
+  )
+}
+
+// STEP 1:
+//   Using the state hook, create a 'count', 'setCount' pair.
+//   The 'count' state should be initialized to the number zero.
+// export default 
+function Counter(props) {
   /* STEP 1 */
+const [count, setCount] = useState(0);
 
+// STEP 4:
+//   This click handler needs to use 'setCount' to schedule the 'count' to become the current 'count' plus one.
+//   These state changes are not synchronous: the updated count arrives on the next run of the Counter component.
+//   Do NOT simply do count++. The plus plus is forbidden! We never mutate a slice of state in place. Even if you could
+//   reassign a const, React would not be aware anything changed. Always use the state updater, passing in a new value.
   const increment = () => {
     /* STEP 4 */
-  };
-  const decrement = () => {
-    /* STEP 5 */
-  };
-  const reset = () => {
-    /* STEP 6 */
+    setCount(count + 1);
   };
 
+  // STEP 5:
+  // This click handler needs to use 'setCount' to set the 'count' to be the current 'count' minus one.
+  // Do NOT do count--. That amounts to trying to mutate 'count' in place. This is the road to perdition.
+ 
+const decrement = () => {
+    /* STEP 5 */
+    setCount(count - 1);
+  };
+
+  // STEP 6:
+  // This click handler needs to use 'setCount' to set the 'count' to be zero again.
+
+  const reset = () => {
+    /* STEP 6 */
+    setCount(count = 0);
+  };
+
+
+  // STEP 2:
+  // The 'style' object has the 'color' property hard-coded to "royalblue".
+  // What the value of 'color' should be instead is a ternary expression that goes like this:
+  // If count is even, then "royalblue", else "crimson".
   const style = {
     fontSize: '1.5em',
     marginBottom: '0.3em',
-    color: 'royalblue', /* STEP 2 */
+    color: even ? 'royalblue' : "crimson" /* STEP 2 */
   };
 
+  // STEP 3:
+  // We need to replace some hard-coded info in the JSX with expressions, interpolated inside curly brackets.
+  // Start by replacing the character "0" with {count}. The 'count' slice of state is the source of truth here.
+  // Then, replace the word "even" with a ternary: {if count is even number, then string "even", else string "odd"}.
   return (
     <div className='widget-counter container'>
       <h2>Counter</h2>
       <div id='count' style={style}>
-        Number 0 is even {/* STEP 3 */}
+        Number {count} is { count === "even" ? <div>even</div>: <div>odd</div>}
       </div>
       <div>
         <button id='increment' onClick={increment}>Increment</button>
@@ -81,3 +121,5 @@ export default function Counter() {
     </div>
   );
 }
+
+export default Counter;
