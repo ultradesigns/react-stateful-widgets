@@ -60,7 +60,7 @@ export const Counter2 = () => {
 // STEP 1:
 //   Using the state hook, create a 'count', 'setCount' pair.
 //   The 'count' state should be initialized to the number zero.
-// export default 
+export default 
 function Counter(props) {
   /* STEP 1 */
 const [count, setCount] = useState(0);
@@ -89,7 +89,7 @@ const decrement = () => {
 
   const reset = () => {
     /* STEP 6 */
-    setCount(count = 0);
+    setCount(0);
   };
 
 
@@ -100,7 +100,7 @@ const decrement = () => {
   const style = {
     fontSize: '1.5em',
     marginBottom: '0.3em',
-    color: even ? 'royalblue' : "crimson" /* STEP 2 */
+    color: count%2 === 0 ? 'royalblue' : "crimson" /* STEP 2 */
   };
 
   // STEP 3:
@@ -122,4 +122,4 @@ const decrement = () => {
   );
 }
 
-export default Counter;
+// export default Counter;
